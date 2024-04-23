@@ -18,11 +18,11 @@ model Restaurant {
 }
 
 model Category {
-  id           String      @id @default(uuid())
-  name         String
-  imageUrl     String
-  restaurants  Restaurant? @relation(fields: [restaurantId], references: [id])
-  restaurantId String?
+  id          String       @id @default(uuid())
+  name        String
+  imageUrl    String
+  restaurants Restaurant[]
+  products    Product[]
 }
 
 model Product {
@@ -34,4 +34,6 @@ model Product {
   discountPercentage Int        @default(0)
   restaurantId       String
   restaurant         Restaurant @relation(fields: [restaurantId], references: [id])
+  categoryId         String
+  category           Category   @relation(fields: [categoryId], references: [id])
 }
